@@ -2,7 +2,7 @@
 
 ## Bellow you can see the phase this project is
 
-- ❌ Entity Category
+- ✔️ Entity Category
 - ❌ Validation Entity Category
 - ❌ Repository Category
 - ❌ Integration with Nestjs

@@ -1,3 +1,4 @@
+import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 
 export type CategoryProps = {
@@ -7,21 +8,13 @@ export type CategoryProps = {
   created_at?: Date;
 };
 
-export class Category {
-  private props: CategoryProps;
-  private _id: UniqueId;
-
+export class Category extends Entity<CategoryProps> {
   constructor(props: CategoryProps, id?: UniqueId) {
+    super(props, id);
     const { is_active, created_at, description } = props;
-    this._id = id ?? new UniqueId();
-    this.props = props;
-    this.props.description = description ?? null;
-    this.props.is_active = is_active ?? true;
-    this.props.created_at = created_at ?? new Date();
-  }
-
-  get id(): UniqueId {
-    return this._id;
+    this.description = description;
+    this.is_active = is_active;
+    this.created_at = created_at;
   }
 
   get name(): string {
@@ -32,11 +25,23 @@ export class Category {
     return this.props.description;
   }
 
+  private set description(value: string) {
+    this.props.description = value ?? null;
+  }
+
   get is_active(): boolean {
     return this.props.is_active;
   }
 
+  private set is_active(value: boolean) {
+    this.props.is_active = value ?? true;
+  }
+
   get created_at(): Date {
     return this.props.created_at;
+  }
+
+  private set created_at(value: Date) {
+    this.props.created_at = value ?? new Date();
   }
 }

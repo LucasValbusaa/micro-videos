@@ -77,4 +77,37 @@ describe("Category Entity Test", () => {
       }).toStrictEqual({ created_at: createdAtInstance, ...stub });
     });
   });
+
+  describe("update", () => {
+    it("should update name or description", () => {
+      const category = new Category(stubCategoryProps());
+      category.update({ name: "New Movie" });
+      expect(category.name).toBe("New Movie");
+
+      category.update({ name: "New Movie", description: "New description" });
+      expect(category.description).toBe("New description");
+    });
+  });
+
+  describe("activate", () => {
+    it("should be turn is_active true when function is called", () => {
+      const stubDeactivate = {
+        name: "Movie",
+        is_active: false,
+      };
+      const category = new Category(stubDeactivate);
+      category.activate();
+
+      expect(category.is_active).toBeTruthy();
+    });
+  });
+
+  describe("Deactivate", () => {
+    it("should be turn is_active false when function is called", () => {
+      const category = new Category(stubCategoryProps());
+      category.deactivate();
+
+      expect(category.is_active).toBeFalsy();
+    });
+  });
 });

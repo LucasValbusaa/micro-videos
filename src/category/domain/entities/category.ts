@@ -1,3 +1,4 @@
+import { ValidatorRules } from "../../../@shared/validators/validator-rules";
 import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 
@@ -15,16 +16,27 @@ export type UpdateCategoryProps = {
 
 export class Category extends Entity<CategoryProps> {
   constructor(props: CategoryProps, id?: UniqueId) {
-    super(props, id);
     const { is_active, created_at, description } = props;
+
+    Category.validate(props);
+
+    super(props, id);
     this.description = description;
     this.is_active = is_active;
     this.created_at = created_at;
   }
 
   update({ name, description }: UpdateCategoryProps) {
+    Category.validate({ name, description });
+
     this.name = name;
     this.description = description ?? this.description;
+  }
+
+  static validate(props: Omit<CategoryProps, "created_at">) {
+    ValidatorRules.values(props.name, "name").required().string();
+    ValidatorRules.values(props.description, "description").string();
+    ValidatorRules.values(props.is_active, "is_active").boolean();
   }
 
   activate() {

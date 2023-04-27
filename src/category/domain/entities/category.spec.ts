@@ -12,6 +12,9 @@ function stubCategoryProps(): CategoryProps {
 }
 
 describe("Category Entity Test", () => {
+  beforeEach(() => {
+    Category.validate = jest.fn();
+  });
   describe("constructor of category", () => {
     it("should validate id field", () => {
       const props = [
@@ -30,6 +33,7 @@ describe("Category Entity Test", () => {
 
     it("should return all fields of category constructor", () => {
       const category = new Category(stubCategoryProps());
+      expect(Category.validate).toHaveBeenCalled();
       expect({
         name: category.name,
         description: category.description,
@@ -81,11 +85,12 @@ describe("Category Entity Test", () => {
   describe("update", () => {
     it("should update name or description", () => {
       const category = new Category(stubCategoryProps());
-      category.update({ name: "New Movie" });
-      expect(category.name).toBe("New Movie");
 
       category.update({ name: "New Movie", description: "New description" });
+
+      expect(Category.validate).toHaveBeenCalledTimes(2);
       expect(category.description).toBe("New description");
+      expect(category.name).toBe("New Movie");
     });
   });
 
@@ -102,7 +107,7 @@ describe("Category Entity Test", () => {
     });
   });
 
-  describe("Deactivate", () => {
+  describe("deactivate", () => {
     it("should be turn is_active false when function is called", () => {
       const category = new Category(stubCategoryProps());
       category.deactivate();

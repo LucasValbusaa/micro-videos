@@ -1,4 +1,3 @@
-import { ValidatorRules } from "../../../@shared/validators/validator-rules";
 import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 import CategoryValidatorFactory from "../validator/category.validator";

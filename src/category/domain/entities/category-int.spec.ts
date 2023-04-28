@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../@shared/errors/validation.error";
+import { ValidationError } from "../../../@shared/domain/errors/validation.error";
 import { Category } from "./category";
 
 describe("Category Integration Test", () => {
@@ -32,8 +32,6 @@ describe("Category Integration Test", () => {
         () => new Category({ name: "Movie", is_active: "" as any })
       ).toThrow(new ValidationError("The is_active must be a boolean"));
     });
-
-    it("should create a valid category", () => {});
   });
   describe("Update Method", () => {
     it("should a invalid category using name property", () => {

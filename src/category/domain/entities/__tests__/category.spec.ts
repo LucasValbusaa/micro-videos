@@ -1,5 +1,5 @@
-import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
-import { Category, CategoryProps } from "./category";
+import { UniqueId } from "../../../../@shared/domain/value-object/unique-id";
+import { Category, CategoryProps } from "../category";
 
 const createdAtInstance = new Date();
 function stubCategoryProps(): CategoryProps {

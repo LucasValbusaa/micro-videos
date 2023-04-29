@@ -1,3 +1,4 @@
+import { EntityValidationError } from "../../../@shared/domain/errors/validation.error";
 import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 import CategoryValidatorFactory from "../validator/category.validator";
@@ -16,9 +17,8 @@ export type UpdateCategoryProps = {
 
 export class Category extends Entity<CategoryProps> {
   constructor(props: CategoryProps, id?: UniqueId) {
-    const { is_active, created_at, description } = props;
-
     Category.validate(props);
+    const { description, is_active, created_at } = props;
 
     super(props, id);
     this.description = description;
@@ -26,11 +26,11 @@ export class Category extends Entity<CategoryProps> {
     this.created_at = created_at;
   }
 
-  update({ name, description }: UpdateCategoryProps) {
-    Category.validate({ name, description });
+  update(data: UpdateCategoryProps) {
+    Category.validate(data);
 
-    this.name = name;
-    this.description = description ?? this.description;
+    this.name = data.name;
+    this.description = data.description ?? this.description;
   }
 
   // Old category validate
@@ -45,7 +45,11 @@ export class Category extends Entity<CategoryProps> {
 
   static validate(props: CategoryProps) {
     const validator = CategoryValidatorFactory.create();
-    validator.validate(props);
+    const isValid = validator.validate(props);
+    if (!isValid) {
+      console.log("Chegou aqui");
+      throw new EntityValidationError(validator.errors);
+    }
   }
 
   activate() {

@@ -6,9 +6,9 @@ export enum SearchDirection {
 export type SearchParamsProps<Filter = string> = {
   page?: number;
   per_page?: number;
-  sort?: string;
-  sort_dir?: SearchDirection;
-  filter?: Filter;
+  sort?: string | null;
+  sort_dir?: SearchDirection | null;
+  filter?: Filter | null;
 };
 
 export class SearchParams {

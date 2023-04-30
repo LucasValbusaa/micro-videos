@@ -1,4 +1,4 @@
-import { SearchParams } from "../pagination/search-params-page";
+import { SearchParams } from "../pagination/search-params";
 import {
   stubSearchParamsNumberToValidate,
   stubSearchParamsStringToValidate,

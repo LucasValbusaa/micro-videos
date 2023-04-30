@@ -11,6 +11,10 @@ export abstract class Entity<Props = any> {
     return this._id.value;
   }
 
+  get _props(): Props {
+    return this.props;
+  }
+
   toJSON() {
     return {
       id: this.id,

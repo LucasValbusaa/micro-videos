@@ -1,5 +1,7 @@
 import { Entity } from "../entity/entity";
 import { UniqueId } from "../value-object/unique-id";
+import { SearchParams } from "./pagination/search-params";
+import { SearchResult } from "./pagination/search-result";
 
 export interface RepositoryInterface<E extends Entity> {
   insert(entity: E): Promise<void>;
@@ -11,8 +13,9 @@ export interface RepositoryInterface<E extends Entity> {
 
 export interface SearchableRepositoryInterface<
   E extends Entity,
-  SearchInput,
-  SearchOutput
+  Filter = string,
+  SearchInput = SearchParams,
+  SearchOutput = SearchResult<E, Filter>
 > extends RepositoryInterface<E> {
   search(props: SearchInput): Promise<SearchOutput>;
 }

@@ -8,3 +8,11 @@ export interface RepositoryInterface<E extends Entity> {
   update(entity: E): Promise<void>;
   delete(id: string | UniqueId): Promise<void>;
 }
+
+export interface SearchableRepositoryInterface<
+  E extends Entity,
+  SearchInput,
+  SearchOutput
+> extends RepositoryInterface<E> {
+  search(props: SearchInput): Promise<SearchOutput>;
+}

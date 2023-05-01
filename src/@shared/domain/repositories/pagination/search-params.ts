@@ -11,16 +11,16 @@ export type SearchParamsProps<Filter = string> = {
   filter?: Filter | null;
 };
 
-export class SearchParams {
+export class SearchParams<Filter = string> {
   private DEFAULT_PAGE_VALUE = 1;
   private DEFAULT_PER_PAGE_VALUE = 15;
 
-  constructor(public readonly props: SearchParamsProps = {}) {
+  constructor(public readonly props: SearchParamsProps<Filter> = {}) {
     this.validatePage(props.page);
     this.validatePerPage(props.per_page);
     this.validateSortDir(props.sort_dir);
-    this.props.sort = this.stringOrNull(props.sort);
-    this.props.filter = this.stringOrNull(props.filter);
+    this.props.sort = this.validateSort(props.sort);
+    this.props.filter = this.validateFilter(props.filter);
   }
 
   private validatePage(value: number): void {
@@ -60,9 +60,15 @@ export class SearchParams {
         : dir;
   }
 
-  private stringOrNull(value: string): string | null {
+  private validateSort(value: string): string | null {
     return value === null || value === undefined || value === ""
       ? null
       : `${value}`;
+  }
+
+  private validateFilter(value: Filter | null): Filter | null {
+    return value === null || value === undefined || value === ("" as unknown)
+      ? null
+      : (`${value}` as any);
   }
 }

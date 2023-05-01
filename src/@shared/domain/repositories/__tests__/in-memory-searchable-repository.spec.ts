@@ -23,8 +23,8 @@ class StubInMemorySearchableRepository extends InMemorySearchableRepository<Stub
 
     return items.filter((i) => {
       return (
-        i._props.name.toLowerCase().includes(filter.toLowerCase()) ||
-        i._props.price.toString() === filter
+        i.props.name.toLowerCase().includes(filter.toLowerCase()) ||
+        i.props.price.toString() === filter
       );
     });
   }

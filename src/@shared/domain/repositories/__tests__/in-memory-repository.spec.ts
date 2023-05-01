@@ -74,7 +74,7 @@ describe("InMemoryRepository Unit Test", () => {
 
     const entityUpdate = new StubEntity(
       { name: "updated name", price: 1 },
-      new UniqueId(entity.id)
+      new UniqueId(entity.id.toString())
     );
 
     await repository.update(entityUpdate);

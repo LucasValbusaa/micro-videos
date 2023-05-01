@@ -20,18 +20,24 @@ export abstract class InMemoryRepository<E extends Entity>
   }
   async update(entity: E): Promise<void> {
     await this._get(entity.id);
-    const indexFound = this.items.findIndex((item) => item.id === entity.id);
+    const indexFound = this.items.findIndex(
+      (item) => item.id.toString() === entity.id.toString()
+    );
     this.items[indexFound] = entity;
   }
   async delete(id: string | UniqueId): Promise<void> {
     const _id = `${id}`;
     await this._get(_id);
-    const indexFound = this.items.findIndex((item) => item.id === _id);
+    const indexFound = this.items.findIndex(
+      (item) => item.id.toString() === _id
+    );
     this.items.splice(indexFound, 1);
   }
 
-  protected async _get(id: string): Promise<E> {
-    const entity = this.items.find((item) => item.id === id);
+  protected async _get(id: string | UniqueId): Promise<E> {
+    const entity = this.items.find(
+      (item) => item.id.toString() === id.toString()
+    );
     if (!entity) {
       throw new NotFoundError(`Entity not found using ID ${id}`);
     }

@@ -16,11 +16,20 @@ describe("SearchResult Unit Tests", () => {
   });
 
   test("construct props", () => {
-    let result = new SearchResult(stubResult);
-    expect(result.toJSON()).toStrictEqual(stubResult);
+    type stubWithFieldsNullProps = SearchResultProps<any, any> & {
+      last_page: number;
+      sort: string | null;
+      sort_dir: string | null;
+      filter: string | null;
+    };
 
-    const stubWithFieldsNull: SearchResultProps<any, any> = {
+    let result = new SearchResult(stubResult);
+
+    expect(result.toJSON()).toStrictEqual({ last_page: 2, ...stubResult });
+
+    const stubWithFieldsNull: stubWithFieldsNullProps = {
       ...stubResult,
+      last_page: 2,
       sort: null,
       sort_dir: null,
       filter: null,

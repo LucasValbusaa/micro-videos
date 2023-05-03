@@ -12,7 +12,7 @@ export type CategoryProps = {
 
 export type UpdateCategoryProps = {
   name: string;
-  description?: string;
+  description: string;
 };
 
 export class Category extends Entity<CategoryProps> {
@@ -30,7 +30,7 @@ export class Category extends Entity<CategoryProps> {
     Category.validate(data);
 
     this.name = data.name;
-    this.description = data.description ?? this.description;
+    this.description = data.description ?? null;
   }
 
   // Old category validate

@@ -7,10 +7,10 @@ export abstract class Entity<Props = any> {
     this.id = id || new UniqueId();
   }
 
-  toJSON() {
+  toJSON(): Required<{ id: string } & Props> {
     return {
-      id: this.id,
+      id: this.id.value,
       ...this.props,
-    };
+    } as Required<{ id: string } & Props>;
   }
 }

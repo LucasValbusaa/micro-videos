@@ -10,7 +10,7 @@ export type SearchResultProps<E extends Entity, Filter = string> = {
   filter: Filter;
 };
 
-export class SearchResult<E extends Entity, Filter = string> {
+export class SearchResult<E extends Entity = Entity, Filter = string> {
   readonly last_page: number;
 
   constructor(private props: SearchResultProps<E, Filter>) {
@@ -20,6 +20,7 @@ export class SearchResult<E extends Entity, Filter = string> {
   toJSON() {
     return {
       ...this.props,
+      last_page: this.last_page,
     };
   }
 }

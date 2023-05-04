@@ -1,3 +1,1 @@
-// created from 'create-ts-index'
-
-export * from './category-output';
+export * from "./category-output";

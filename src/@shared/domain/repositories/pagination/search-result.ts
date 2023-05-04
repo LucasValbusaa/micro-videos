@@ -1,4 +1,4 @@
-import { Entity } from "../../entity/entity";
+import { Entity } from "../../entity";
 
 export type SearchResultProps<E extends Entity, Filter = string> = {
   items: E[];

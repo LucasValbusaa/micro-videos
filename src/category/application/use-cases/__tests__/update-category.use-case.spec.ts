@@ -1,6 +1,6 @@
-import { Category } from "../../../domain/entities/category";
-import NotFoundError from "../../../../@shared/domain/errors/not-fount.error";
-import { CategoryInMemoryRepository } from "../../../infra/repositories/category-in-memory.repository";
+import { Category } from "#category/domain/entities";
+import { NotFoundError } from "#shared/domain/errors";
+import { CategoryInMemoryRepository } from "#category/infra/repositories";
 import { UpdateCategoryUseCase } from "../update-category.use-case";
 import { updateCategoryParams } from "./stubs";
 

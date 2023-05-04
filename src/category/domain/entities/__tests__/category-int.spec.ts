@@ -1,4 +1,4 @@
-import { EntityValidationError } from "../../../../@shared/domain/errors/validation.error";
+import { EntityValidationError } from "#shared/domain/errors";
 import { Category } from "../category";
 import {
   stubInvalidCreatedAtProperty,

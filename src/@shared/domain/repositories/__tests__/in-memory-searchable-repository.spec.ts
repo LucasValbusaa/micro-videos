@@ -1,7 +1,7 @@
-import { Entity } from "../../entity/entity";
+import { Entity } from "../../entity";
 import { InMemorySearchableRepository } from "../in-memory-searchable-repository";
-import { SearchDirection, SearchParams } from "../pagination/search-params";
-import { SearchResult } from "../pagination/search-result";
+import { SearchDirection, SearchParams } from "../pagination";
+import { SearchResult } from "../pagination";
 
 type StubEntityProps = {
   name: string;

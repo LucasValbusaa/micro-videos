@@ -1,7 +1,7 @@
-import { Entity } from "../entity/entity";
+import { Entity } from "../entity";
 import { InMemoryRepository } from "./in-memory-repository";
-import { SearchDirection, SearchParams } from "./pagination/search-params";
-import { SearchResult } from "./pagination/search-result";
+import { SearchDirection, SearchParams } from "./pagination";
+import { SearchResult } from "./pagination";
 import { SearchableRepositoryInterface } from "./repository-contracts";
 
 export abstract class InMemorySearchableRepository<E extends Entity>

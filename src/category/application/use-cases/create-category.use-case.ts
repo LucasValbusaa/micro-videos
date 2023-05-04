@@ -1,6 +1,6 @@
-import { UseCase } from "../../../@shared/application/use-case";
-import { Category } from "../../domain/entities/category";
-import CategoryRepository from "../../domain/repository/category.repository";
+import { UseCase } from "#shared/application";
+import { Category } from "#category/domain/entities";
+import CategoryRepository from "#category/domain/repository/category.repository";
 import { CategoryOutput } from "../dto/category-output";
 
 export class CreateCategoryUseCase implements UseCase<Input, Output> {

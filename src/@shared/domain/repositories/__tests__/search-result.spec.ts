@@ -1,4 +1,4 @@
-import { SearchResult, SearchResultProps } from "../pagination/search-result";
+import { SearchResult, SearchResultProps } from "../pagination";
 
 describe("SearchResult Unit Tests", () => {
   let stubResult: SearchResultProps<any, any>;

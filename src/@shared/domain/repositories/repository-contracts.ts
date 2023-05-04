@@ -1,7 +1,7 @@
-import { Entity } from "../entity/entity";
-import { UniqueId } from "../value-object/unique-id";
-import { SearchParams } from "./pagination/search-params";
-import { SearchResult } from "./pagination/search-result";
+import { Entity } from "../entity";
+import { UniqueId } from "../value-object";
+import { SearchParams } from "./pagination";
+import { SearchResult } from "./pagination";
 
 export interface RepositoryInterface<E extends Entity> {
   insert(entity: E): Promise<void>;

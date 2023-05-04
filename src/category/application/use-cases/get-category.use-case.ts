@@ -1,5 +1,5 @@
-import { UseCase } from "../../../@shared/application/use-case";
-import CategoryRepository from "../../domain/repository/category.repository";
+import { UseCase } from "#shared/application";
+import CategoryRepository from "#category/domain/repository/category.repository";
 import { CategoryOutput } from "../dto/category-output";
 
 export class GetCategoryUseCase implements UseCase<Input, Output> {

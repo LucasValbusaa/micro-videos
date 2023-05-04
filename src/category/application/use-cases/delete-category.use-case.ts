@@ -1,7 +1,5 @@
-import { UseCase } from "../../../@shared/application/use-case";
-import { Category } from "../../domain/entities/category";
-import CategoryRepository from "../../domain/repository/category.repository";
-import { CategoryOutput } from "../dto/category-output";
+import { UseCase } from "#shared/application";
+import CategoryRepository from "#category/domain/repository/category.repository";
 
 export class DeleteCategoryUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepo: CategoryRepository.Repository) {}

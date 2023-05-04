@@ -1,9 +1,11 @@
-import { UseCase } from "../../../@shared/application/use-case";
-import CategoryRepository from "../../domain/repository/category.repository";
+import { UseCase } from "#shared/application";
+import CategoryRepository from "#category/domain/repository/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
-import { SearchParamsInputDTO } from "../../../@shared/application/dto/search-params-input.dto";
-import { PaginationOutputDTO } from "../../../@shared/application/dto/pagination-output.dto";
-import { PaginationOutputMapper } from "../../../@shared/application/utils/pagination-output";
+import {
+  SearchParamsInputDTO,
+  PaginationOutputDTO,
+} from "#shared/application/dto";
+import { PaginationOutputMapper } from "#shared/application/utils";
 
 export class ListCategoriesUseCase implements UseCase<Input, Output> {
   constructor(private categoryRepo: CategoryRepository.Repository) {}

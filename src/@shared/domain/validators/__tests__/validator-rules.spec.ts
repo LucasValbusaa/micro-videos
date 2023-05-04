@@ -1,5 +1,5 @@
-import { ValidationError } from "../../errors/validation.error";
-import { ValidatorRules } from "../../validators/validator-rules";
+import { ValidationError } from "../../errors";
+import { ValidatorRules } from "../../validators";
 
 type Values = {
   value: any;

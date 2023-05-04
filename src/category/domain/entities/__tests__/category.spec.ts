@@ -1,4 +1,4 @@
-import { UniqueId } from "../../../../@shared/domain/value-object/unique-id";
+import { UniqueId } from "#shared/domain/value-object";
 import { Category, CategoryProps } from "../category";
 
 const createdAtInstance = new Date();

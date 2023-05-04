@@ -1,4 +1,4 @@
-import { SearchDirection } from "../pagination/search-params";
+import { SearchDirection } from "../pagination";
 
 export function stubSearchParamsNumberToValidate(defaultExpectedValue: number) {
   return [

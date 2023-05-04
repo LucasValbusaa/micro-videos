@@ -1,4 +1,4 @@
-import { Category } from "category/domain/entities/category";
+import { Category } from "#category/domain/entities";
 
 export type CategoryOutput = {
   id: string;

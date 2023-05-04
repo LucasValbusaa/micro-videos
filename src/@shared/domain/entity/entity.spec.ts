@@ -1,4 +1,4 @@
-import { UniqueId } from "../value-object/unique-id";
+import { UniqueId } from "../value-object/";
 import { Entity } from "./entity";
 import { validate as uuidValidate } from "uuid";
 

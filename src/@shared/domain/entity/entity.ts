@@ -1,4 +1,4 @@
-import { UniqueId } from "../value-object/unique-id";
+import { UniqueId } from "../value-object";
 
 export abstract class Entity<Props = any> {
   public readonly id: UniqueId;

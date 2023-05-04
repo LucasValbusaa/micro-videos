@@ -1,6 +1,6 @@
-import { Entity } from "../../entity/entity";
-import NotFoundError from "../../errors/not-fount.error";
-import { UniqueId } from "../../value-object/unique-id";
+import { Entity } from "../../entity/";
+import { NotFoundError } from "../../errors";
+import { UniqueId } from "../../value-object";
 import { InMemoryRepository } from "../in-memory-repository";
 
 type StubEntityProps = {

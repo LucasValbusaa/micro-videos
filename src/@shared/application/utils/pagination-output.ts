@@ -1,5 +1,5 @@
-import { SearchResult } from "@shared/domain/repositories/pagination/search-result";
-import { PaginationOutputDTO } from "../dto/pagination-output.dto";
+import { SearchResult } from "#shared/domain/repositories/pagination";
+import { PaginationOutputDTO } from "../dto";
 
 export class PaginationOutputMapper {
   static toOutput(

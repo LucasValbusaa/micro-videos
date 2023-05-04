@@ -1,4 +1,4 @@
-import { SearchDirection } from "../../../@shared/domain/repositories/pagination/search-params";
+import { SearchDirection } from "#shared/domain/repositories/pagination";
 
 export type SearchParamsInputDTO<Filter = string> = {
   page?: number;

@@ -1,4 +1,4 @@
-import { SearchResult } from "../../domain/repositories/pagination/search-result";
+import { SearchResult } from "#shared/domain/repositories/pagination";
 import { PaginationOutputMapper } from "./pagination-output";
 
 describe("PaginationOutputMapper", () => {

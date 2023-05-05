@@ -1,17 +1,19 @@
-import { UseCase } from "#shared/application";
+import { UseCase as DefaultUseCase } from "#shared/application";
 import CategoryRepository from "#category/domain/repository/category.repository";
 
-export class DeleteCategoryUseCase implements UseCase<Input, Output> {
-  constructor(private categoryRepo: CategoryRepository.Repository) {}
+export namespace DeleteCategoryUseCase {
+  export class UseCase implements DefaultUseCase<Input, Output> {
+    constructor(private categoryRepo: CategoryRepository.Repository) {}
 
-  async execute(input: Input): Promise<Output> {
-    const entity = await this.categoryRepo.findById(input.id);
-    await this.categoryRepo.delete(entity.id.value);
+    async execute(input: Input): Promise<Output> {
+      const entity = await this.categoryRepo.findById(input.id);
+      await this.categoryRepo.delete(entity.id.value);
+    }
   }
+
+  export type Input = {
+    id: string;
+  };
+
+  export type Output = void;
 }
-
-export type Input = {
-  id: string;
-};
-
-export type Output = void;

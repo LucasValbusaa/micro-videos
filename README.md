@@ -6,6 +6,6 @@
 - ✔️ Validation Entity Category
 - ✔️ Repository Category
 - ✔️ UseCases Category
-- ❌ Integration with Nestjs
+- ❌ Integration of a with core application with Nestjs
 - ❌ Category API Rest In Memory
-- ❌ Integration with database
+- ❌ Integration with database and Sequelize

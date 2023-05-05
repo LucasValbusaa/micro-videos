@@ -1,0 +1,30 @@
+{
+  "name": "micro-videos",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "class-validator": "^0.14.0",
+    "uuid": "^9.0.0",
+    "jest": "^29.5.0",
+    "create-ts-index": "^1.14.0"
+  },
+  "workspaces": [
+    "./src/@core",
+    "./src/nestjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasValbusaa/micro-videos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasValbusaa/micro-videos/issues"
+  },
+  "homepage": "https://github.com/LucasValbusaa/micro-videos#readme"
+}

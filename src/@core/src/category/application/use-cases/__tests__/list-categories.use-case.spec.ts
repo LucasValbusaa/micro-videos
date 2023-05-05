@@ -5,12 +5,12 @@ import { Category } from "#category/domain/entities";
 import { SearchDirection } from "#shared/domain/repositories/pagination";
 
 describe("ListCategoriesUseCase Unit Tests", () => {
-  let useCase: ListCategoriesUseCase;
+  let useCase: ListCategoriesUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     repository = new CategoryInMemoryRepository();
-    useCase = new ListCategoriesUseCase(repository);
+    useCase = new ListCategoriesUseCase.UseCase(repository);
   });
 
   test("toOutput method", () => {

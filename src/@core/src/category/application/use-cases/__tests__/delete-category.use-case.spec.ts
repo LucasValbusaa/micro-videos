@@ -4,12 +4,12 @@ import { CategoryInMemoryRepository } from "#category/infra/repositories";
 import { DeleteCategoryUseCase } from "../delete-category.use-case";
 
 describe("DeleteCategoryUseCase Unit Tests", () => {
-  let useCase: DeleteCategoryUseCase;
+  let useCase: DeleteCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeEach(() => {
     repository = new CategoryInMemoryRepository();
-    useCase = new DeleteCategoryUseCase(repository);
+    useCase = new DeleteCategoryUseCase.UseCase(repository);
   });
 
   it("should throws error when entity not found", async () => {

@@ -1,40 +1,10 @@
 {
-  "name": "@core/micro-videos",
+  "name": "@micro-videos/core",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "imports": {
-    "#shared/*": "./dist/@shared/*.js",
-    "#category/*": "./dist/category/*.js"
-  },
   "exports": {
-    "./@shared/application": "./dist/@shared/application/index.js",
-    "./@shared/domain": "./dist/@shared/domain/index.js",
-    "./category/application": "./dist/category/application/index.js",
-    "./category/domain": "./dist/category/domain/index.js",
-    "./category/infra": "./dist/category/infra/index.js"
-  },
-  "typesVersions": {
-    ">=4.0": {
-      "@shared/application": [
-        "./dist/@shared/application/index.d.ts"
-      ],
-      "@shared/domain": [
-        "./dist/@shared/domain/index.d.ts"
-      ],
-      "@shared/infra": [
-        "./dist/@shared/infra/index.d.ts"
-      ],
-      "category/application": [
-        "./dist/category/application/index.d.ts"
-      ],
-      "category/domain": [
-        "./dist/category/domain/index.d.ts"
-      ],
-      "category/infra": [
-        "./dist/category/infra/index.d.ts"
-      ]
-    }
+    "./src/category/domain": "./dist/category/domain/index.js"
   },
   "scripts": {
     "tsc": "tsc",
@@ -56,9 +26,7 @@
     "@types/node": "^18.15.11",
     "@types/uuid": "^9.0.1",
     "ts-node": "^10.9.1",
-    "ttypescript": "^1.5.15",
-    "typescript": "^5.0.4",
-    "typescript-transform-paths": "^3.4.6"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "class-validator": "^0.14.0",

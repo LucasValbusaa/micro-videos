@@ -1,4 +1,4 @@
-import { SearchResult } from "#shared/domain/repositories/pagination";
+import { SearchResult } from "../../domain/repositories/pagination/search-result";
 import { PaginationOutputDTO } from "../dto";
 
 export class PaginationOutputMapper {

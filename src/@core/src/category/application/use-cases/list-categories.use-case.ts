@@ -1,11 +1,11 @@
-import { UseCase as DefaultUseCase } from "#shared/application";
-import CategoryRepository from "#category/domain/repository/category.repository";
+import { UseCase as DefaultUseCase } from "../../../@shared/application/use-case";
+import CategoryRepository from "../../domain/repository/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 import {
   SearchParamsInputDTO,
   PaginationOutputDTO,
-} from "#shared/application/dto";
-import { PaginationOutputMapper } from "#shared/application/utils";
+} from "../../../@shared/application/dto";
+import { PaginationOutputMapper } from "../../../@shared/application/utils/pagination-output";
 
 export namespace ListCategoriesUseCase {
   export class UseCase implements DefaultUseCase<Input, Output> {

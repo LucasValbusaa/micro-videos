@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "jest",
-    "prestart:dev": "npm run build -w @core/micro-videos",
-    "start:dev": "concurrently -p \"none\" \"npm:build:w -w @core/micro-videos\" \"npm:start:dev -w nestjs\""
+    "prestart:dev": "npm run build -w @micro-videos/core",
+    "start:dev": "concurrently -p \"none\" \"npm:build:w -w @micro-videos/core\" \"npm:start:dev -w @micro-videos/nestjs\""
   },
   "dependencies": {
     "class-validator": "^0.14.0",
@@ -15,8 +16,7 @@
     "uuid": "^9.0.0"
   },
   "workspaces": [
-    "./src/@core",
-    "./src/nestjs"
+    "src/*"
   ],
   "repository": {
     "type": "git",

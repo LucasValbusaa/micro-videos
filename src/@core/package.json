@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    "./src/category/domain": "./dist/category/domain/index.js"
+    "./src/@shared/application": "./dist/@shared/application/index.js",
+    "./src/@shared/domain": "./dist/@shared/domain/index.js",
+    "./src/@shared/infra": "./dist/@shared/infra/index.js",
+    "./src/category/application": "./dist/category/application/index.js",
+    "./src/category/domain": "./dist/category/domain/index.js",
+    "./src/category/infra": "./dist/category/infra/index.js"
   },
   "scripts": {
     "tsc": "tsc",

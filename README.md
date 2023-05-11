@@ -7,5 +7,5 @@
 - ✔️ Repository Category
 - ✔️ UseCases Category
 - ✔️ Integration of a with core application with Nestjs
-- ❌ Category API Rest In Memory
+- ✔️ Category API Rest In Memory
 - ❌ Integration with database and Sequelize

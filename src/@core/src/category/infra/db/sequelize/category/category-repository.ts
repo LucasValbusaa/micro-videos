@@ -2,9 +2,9 @@ import {
   NotFoundError,
   SearchDirection,
   UniqueId,
-} from "../../../../@shared/domain";
-import { Category } from "../../../domain";
-import CategoryRepository from "../../../domain/repository/category.repository";
+} from "../../../../../@shared/domain";
+import { Category } from "../../../../domain";
+import CategoryRepository from "../../../../domain/repository/category.repository";
 import { CategoryModel } from "./category-model";
 import { CategoryModelMapper } from "./category-mapper";
 import { Op } from "sequelize";
@@ -12,9 +12,34 @@ import { Op } from "sequelize";
 export class CategorySequelizeRepository
   implements CategoryRepository.Repository
 {
-  sortableFields: string[];
+  sortableFields: string[] = ["name", "created_at"];
 
   constructor(private categoryModel: typeof CategoryModel) {}
+
+  async insert(entity: Category): Promise<void> {
+    await this.categoryModel.create(entity.toJSON());
+  }
+  async findById(id: string | UniqueId): Promise<Category> {
+    const model = await this._get(id.toString());
+    return CategoryModelMapper.toEntity(model);
+  }
+
+  async findAll(): Promise<Category[]> {
+    const model = await this.categoryModel.findAll();
+    return model.map((m) => CategoryModelMapper.toEntity(m));
+  }
+  async update(entity: Category): Promise<void> {
+    const id = entity.id.toString();
+    await this._get(id);
+    await this.categoryModel.update(entity.toJSON(), {
+      where: { id },
+    });
+  }
+  async delete(id: string | UniqueId): Promise<void> {
+    const _id = id.toString();
+    await this._get(_id);
+    await this.categoryModel.destroy({ where: { id: _id } });
+  }
 
   async search({
     props,
@@ -42,24 +67,6 @@ export class CategorySequelizeRepository
       sort_dir: props.sort_dir,
       filter: props.filter,
     });
-  }
-  async insert(entity: Category): Promise<void> {
-    await this.categoryModel.create(entity.toJSON());
-  }
-  async findById(id: string | UniqueId): Promise<Category> {
-    const model = await this._get(id.toString());
-    return CategoryModelMapper.toEntity(model);
-  }
-
-  async findAll(): Promise<Category[]> {
-    const model = await this.categoryModel.findAll();
-    return model.map((m) => CategoryModelMapper.toEntity(m));
-  }
-  update(entity: Category): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  delete(id: string | UniqueId): Promise<void> {
-    throw new Error("Method not implemented.");
   }
 
   private async _get(id: string) {

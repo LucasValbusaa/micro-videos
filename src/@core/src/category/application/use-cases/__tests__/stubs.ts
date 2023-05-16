@@ -1,3 +1,4 @@
+import { CategoryModel } from "category/infra";
 import { Category } from "../../../domain/entities/category";
 
 type UpdateCategoryParamsProps = {
@@ -18,7 +19,7 @@ type UpdateCategoryParamsProps = {
 
 export function updateCategoryParams(
   id: string,
-  category: Category
+  category: Category | CategoryModel
 ): UpdateCategoryParamsProps[] {
   return [
     {
@@ -27,7 +28,7 @@ export function updateCategoryParams(
         name: "Movie Update",
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: null,
         is_active: true,
@@ -41,7 +42,7 @@ export function updateCategoryParams(
         description: "some description",
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: "some description",
         is_active: true,
@@ -54,7 +55,7 @@ export function updateCategoryParams(
         name: "Movie Update",
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: null,
         is_active: true,
@@ -68,7 +69,7 @@ export function updateCategoryParams(
         is_active: false,
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: null,
         is_active: false,
@@ -81,7 +82,7 @@ export function updateCategoryParams(
         name: "Movie Update",
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: null,
         is_active: false,
@@ -95,7 +96,7 @@ export function updateCategoryParams(
         is_active: true,
       },
       expected: {
-        id: category.id.value,
+        id: category.id.toString(),
         name: "Movie Update",
         description: null,
         is_active: true,

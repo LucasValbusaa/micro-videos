@@ -1,6 +1,6 @@
 import { Category } from "../../../domain/entities/category";
 import { NotFoundError } from "../../../../@shared/domain/errors/not-fount.error";
-import { CategoryInMemoryRepository } from "../../../infra/repositories/category-in-memory.repository";
+import { CategoryInMemoryRepository } from "../../../infra/db/in-memory";
 import { UpdateCategoryUseCase } from "../update-category.use-case";
 import { updateCategoryParams } from "./stubs";
 
@@ -14,7 +14,7 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
   });
 
   it("should throws error when entity not found", async () => {
-    expect(() =>
+    await expect(() =>
       useCase.execute({ id: "fake_id", name: "fake" })
     ).rejects.toThrow(new NotFoundError("Entity not found using ID fake_id"));
   });

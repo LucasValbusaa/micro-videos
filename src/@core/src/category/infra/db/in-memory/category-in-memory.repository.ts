@@ -1,6 +1,6 @@
-import CategoryRepository from "../../domain/repository/category.repository";
-import { InMemorySearchableRepository } from "../../../@shared/domain/repositories/in-memory-searchable-repository";
-import { Category } from "../../domain/entities/category";
+import CategoryRepository from "../../../domain/repository/category.repository";
+import { InMemorySearchableRepository } from "../../../../@shared/domain/repositories/in-memory-searchable-repository";
+import { Category } from "../../../domain/entities/category";
 
 export class CategoryInMemoryRepository
   extends InMemorySearchableRepository<Category>

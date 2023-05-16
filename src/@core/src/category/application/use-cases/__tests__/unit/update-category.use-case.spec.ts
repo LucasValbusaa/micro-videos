@@ -1,8 +1,8 @@
-import { Category } from "../../../domain/entities/category";
-import { NotFoundError } from "../../../../@shared/domain/errors/not-fount.error";
-import { CategoryInMemoryRepository } from "../../../infra/db/in-memory";
-import { UpdateCategoryUseCase } from "../update-category.use-case";
-import { updateCategoryParams } from "./stubs";
+import { Category } from "../../../../domain/entities/category";
+import { NotFoundError } from "../../../../../@shared/domain/errors/not-fount.error";
+import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory";
+import { UpdateCategoryUseCase } from "../../update-category.use-case";
+import { updateCategoryParams } from "../stubs";
 
 describe("UpdateCategoryUseCase Unit Tests", () => {
   let useCase: UpdateCategoryUseCase.UseCase;

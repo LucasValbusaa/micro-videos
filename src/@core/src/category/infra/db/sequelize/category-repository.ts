@@ -16,10 +16,32 @@ export class CategorySequelizeRepository
 
   constructor(private categoryModel: typeof CategoryModel) {}
 
-  search(
-    props: CategoryRepository.SearchParams
-  ): Promise<CategoryRepository.SearchResult> {
-    throw new Error("Method not implemented.");
+  async search({
+    props,
+  }: CategoryRepository.SearchParams): Promise<CategoryRepository.SearchResult> {
+    const offset = (props.page - 1) * props.per_page;
+    const limit = props.per_page;
+
+    const { rows, count } = await this.categoryModel.findAndCountAll({
+      ...(props.filter && {
+        where: { name: { [Op.like]: `%${props.filter}%` } },
+      }),
+      ...(props.sort && this.sortableFields.includes(props.sort)
+        ? { order: [[props.sort, props.sort_dir]] }
+        : { order: [["created_at", "DESC"]] }),
+      offset,
+      limit,
+    });
+
+    return new CategoryRepository.SearchResult({
+      items: rows.map((m) => CategoryModelMapper.toEntity(m)),
+      current_page: props.page,
+      per_page: props.per_page,
+      total: count,
+      sort: props.sort,
+      sort_dir: props.sort_dir,
+      filter: props.filter,
+    });
   }
   async insert(entity: Category): Promise<void> {
     await this.categoryModel.create(entity.toJSON());

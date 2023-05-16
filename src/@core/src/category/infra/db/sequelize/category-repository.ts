@@ -1,8 +1,13 @@
-import { NotFoundError, UniqueId } from "../../../../@shared/domain";
+import {
+  NotFoundError,
+  SearchDirection,
+  UniqueId,
+} from "../../../../@shared/domain";
 import { Category } from "../../../domain";
 import CategoryRepository from "../../../domain/repository/category.repository";
 import { CategoryModel } from "./category-model";
 import { CategoryModelMapper } from "./category-mapper";
+import { Op } from "sequelize";
 
 export class CategorySequelizeRepository
   implements CategoryRepository.Repository
@@ -24,8 +29,9 @@ export class CategorySequelizeRepository
     return CategoryModelMapper.toEntity(model);
   }
 
-  findAll(): Promise<Category[]> {
-    throw new Error("Method not implemented.");
+  async findAll(): Promise<Category[]> {
+    const model = await this.categoryModel.findAll();
+    return model.map((m) => CategoryModelMapper.toEntity(m));
   }
   update(entity: Category): Promise<void> {
     throw new Error("Method not implemented.");

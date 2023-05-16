@@ -31,11 +31,11 @@ describe("InMemoryRepository Unit Test", () => {
   });
 
   it("should throws error when entity not found", async () => {
-    expect(repository.findById("fake_id")).rejects.toThrow(
+    await expect(repository.findById("fake_id")).rejects.toThrow(
       new NotFoundError("Entity not found using ID fake_id")
     );
 
-    expect(
+    await expect(
       repository.findById("5982cad0-20d3-4b66-b648-c82c799ea2f6")
     ).rejects.toThrow(
       new NotFoundError(
@@ -64,7 +64,7 @@ describe("InMemoryRepository Unit Test", () => {
   });
 
   it("should throws error on update when entity not found", async () => {
-    expect(repository.update(entity)).rejects.toThrow(
+    await expect(repository.update(entity)).rejects.toThrow(
       new NotFoundError(`Entity not found using ID ${entity.id}`)
     );
   });
@@ -82,11 +82,11 @@ describe("InMemoryRepository Unit Test", () => {
   });
 
   it("should throws error on delete when entity not found", async () => {
-    expect(repository.delete("fake_id")).rejects.toThrow(
+    await expect(repository.delete("fake_id")).rejects.toThrow(
       new NotFoundError("Entity not found using ID fake_id")
     );
 
-    expect(
+    await expect(
       repository.delete("5982cad0-20d3-4b66-b648-c82c799ea2f6")
     ).rejects.toThrow(
       new NotFoundError(

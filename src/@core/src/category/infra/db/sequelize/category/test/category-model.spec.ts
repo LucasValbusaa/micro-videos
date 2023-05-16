@@ -1,13 +1,13 @@
 import { DataType, Sequelize } from "sequelize-typescript";
-import { CategoryModel } from "./category-model";
-import { setupSequelize } from "../../../../@shared/infra/";
+import { CategoryModel } from "../category-model";
+import { setupSequelize } from "../../../../../../@shared/infra/";
 
 describe("CategoryModel Unit Test", () => {
   setupSequelize({ models: [CategoryModel] });
 
   test("mapping properties", () => {
     const attributesMap = CategoryModel.getAttributes();
-    console.log(attributesMap);
+
     const attributes = Object.keys(CategoryModel.getAttributes());
     expect(attributes).toStrictEqual([
       "id",

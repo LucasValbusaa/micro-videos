@@ -1,8 +1,8 @@
-import { CategoryModel } from "./category-model";
-import { CategoryModelMapper } from "./category-mapper";
-import { LoadEntityError, UniqueId } from "../../../../@shared/domain";
-import { Category } from "../../../domain";
-import { setupSequelize } from "../../../../@shared/infra/";
+import { CategoryModel } from "../category-model";
+import { CategoryModelMapper } from "../category-mapper";
+import { LoadEntityError, UniqueId } from "../../../../../../@shared/domain";
+import { Category } from "../../../../../domain";
+import { setupSequelize } from "../../../../../../@shared/infra";
 
 describe("CategoryModelMapper Unit Test", () => {
   setupSequelize({ models: [CategoryModel] });

@@ -17,9 +17,12 @@ export class SearchResult<E extends Entity = Entity, Filter = string> {
     this.last_page = Math.ceil(this.props.total / this.props.per_page);
   }
 
-  toJSON() {
+  toJSON(forceEntity = false) {
     return {
       ...this.props,
+      items: forceEntity
+        ? this.props.items.map((item) => item.toJSON())
+        : this.props.items,
       last_page: this.last_page,
     };
   }

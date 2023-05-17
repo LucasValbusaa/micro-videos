@@ -13,7 +13,6 @@ describe("CategoryModelMapper Unit Test", () => {
     });
     try {
       CategoryModelMapper.toEntity(model);
-      fail("The category is valid, but it needs throws a LoadEntityError");
     } catch (e) {
       expect(e).toBeInstanceOf(LoadEntityError);
       expect(e.error).toStrictEqual({

@@ -5,7 +5,7 @@ import {
   NotFoundError,
   SearchDirection,
 } from "../../../../../../@shared/domain";
-import { setupSequelize } from "../../../../../../@shared/infra/";
+import { setupSequelize } from "../../../../../../@shared/infra";
 import _chance from "chance";
 import { CategoryModelMapper } from "../category-mapper";
 

@@ -21,7 +21,7 @@ export namespace ListCategoriesUseCase {
     private toOutput(searchResult: CategoryRepository.SearchResult): Output {
       const items = searchResult
         .toJSON()
-        .items.map((i) => CategoryOutputMapper.toOutput(i));
+        .items.map((i: any) => CategoryOutputMapper.toOutput(i));
       return {
         items,
         ...PaginationOutputMapper.toOutput(searchResult),

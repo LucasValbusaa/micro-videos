@@ -1,12 +1,16 @@
-import { CategoriesController } from "./categories.controller";
-import { CreateCategoryDto } from "./dto/create-category.dto";
+import { CategoriesController } from "../../categories.controller";
+import { CreateCategoryDto } from "../../dto/create-category.dto";
 import {
   CreateCategoryUseCase,
   GetCategoryUseCase,
   ListCategoriesUseCase,
 } from "@micro-videos/core/src/category/application";
-import { UpdateCategoryDto } from "./dto/update-category.dto";
+import { UpdateCategoryDto } from "../../dto/update-category.dto";
 import { SearchDirection } from "@micro-videos/core/src/@shared/domain";
+import {
+  CategoryCollectionPresenter,
+  CategoryPresenter,
+} from "../../presenter/category-presenter";
 
 describe("CategoriesController Unit Tests", () => {
   let controller: CategoriesController;
@@ -34,10 +38,11 @@ describe("CategoriesController Unit Tests", () => {
       description: "Some Description",
       is_active: true,
     };
-    const output = await controller.create(input);
+    const presenter = await controller.create(input);
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(input);
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
   });
 
   it("should update a category", async () => {
@@ -60,13 +65,14 @@ describe("CategoriesController Unit Tests", () => {
       description: "Some Description",
       is_active: true,
     };
-    const output = await controller.update(id, input);
+    const presenter = await controller.update(id, input);
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith({
       id,
       ...input,
     });
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
   });
 
   it("should delete a category", async () => {
@@ -100,14 +106,15 @@ describe("CategoriesController Unit Tests", () => {
     };
     //@ts-expect-error
     controller["getUseCase"] = mockCreateUseCase;
-    const output = await controller.findOne(id);
+    const presenter = await controller.findOne(id);
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith({ id });
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
   });
 
   it("should list categories", async () => {
-    const expectedOutput: ListCategoriesUseCase.Output = {
+    const output: ListCategoriesUseCase.Output = {
       items: [
         {
           id: "5982cad0-20d3-4b66-b648-c82c799ea2f6",
@@ -124,7 +131,7 @@ describe("CategoriesController Unit Tests", () => {
     };
 
     const mockCreateUseCase = {
-      execute: jest.fn().mockReturnValue(expectedOutput),
+      execute: jest.fn().mockReturnValue(output),
     };
     //@ts-expect-error
     controller["listUseCase"] = mockCreateUseCase;
@@ -135,10 +142,10 @@ describe("CategoriesController Unit Tests", () => {
       sort_dir: "desc" as SearchDirection,
       filter: "test",
     };
-    const output = await controller.search(searchParams);
-
+    const presenter = await controller.search(searchParams);
+    expect(presenter).toBeInstanceOf(CategoryCollectionPresenter);
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(searchParams);
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toEqual(new CategoryCollectionPresenter(output));
   });
 });
 

@@ -2,6 +2,7 @@ import { EntityValidationError } from "../../../@shared/domain/errors/validation
 import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 import CategoryValidatorFactory from "../validator/category.validator";
+import { CategoryFakeBuilder } from "./category-fake-builder";
 
 export type CategoryProps = {
   name: string;
@@ -89,5 +90,9 @@ export class Category extends Entity<CategoryProps> {
 
   private set created_at(value: Date) {
     this.props.created_at = value ?? new Date();
+  }
+
+  static fake() {
+    return CategoryFakeBuilder;
   }
 }

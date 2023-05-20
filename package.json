@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "test:cov": "jest --coverage",
     "prestart:dev": "npm run build -w @micro-videos/core",
     "start:dev": "concurrently -p \"none\" \"npm:build:w -w @micro-videos/core\" \"npm:start:dev -w @micro-videos/nestjs\""
   },

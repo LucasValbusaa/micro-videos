@@ -19,6 +19,11 @@ export class CategorySequelizeRepository
   async insert(entity: Category): Promise<void> {
     await this.categoryModel.create(entity.toJSON());
   }
+
+  async bulkInsert(entities: Category[]): Promise<void> {
+    await this.categoryModel.bulkCreate(entities.map((e) => e.toJSON()));
+  }
+
   async findById(id: string | UniqueId): Promise<Category> {
     const model = await this._get(id.toString());
     return CategoryModelMapper.toEntity(model);

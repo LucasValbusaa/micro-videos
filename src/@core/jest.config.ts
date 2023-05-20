@@ -4,7 +4,7 @@ export default {
     color: "cyanBright",
   },
   clearMocks: true,
-  coverageDirectory: "<rootDir>/../__coverage",
+  coverageDirectory: "../__coverage",
   coverageProvider: "v8",
   coverageThreshold: {
     global: {

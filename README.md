@@ -9,3 +9,7 @@
 - ✔️ Integration of a with core application with Nestjs
 - ✔️ Category API Rest In Memory
 - ✔️ Integration with database and Sequelize
+- ✔️ Integration with database and Sequelize
+- ✔️ Create Configuration Environment
+- ✔️ Create Presenter Layer and CategoryFakeBuilder
+- ❌ Create tests end-to-end

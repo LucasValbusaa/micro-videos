@@ -3,3 +3,4 @@ __coverage
 tsconfig.tsbuildinfo
 dist
 app.http
+dbdata

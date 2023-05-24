@@ -16,6 +16,7 @@ import {
   DeleteCategoryUseCase,
   UpdateCategoryUseCase,
   GetCategoryUseCase,
+  CategoryOutput,
 } from "@micro-videos/core/src/category/application";
 import { CreateCategoryDto } from "./dto/create-category.dto";
 import { UpdateCategoryDto } from "./dto/update-category.dto";
@@ -45,7 +46,7 @@ export class CategoriesController {
   @Post()
   async create(@Body() createCategoryDto: CreateCategoryDto) {
     const output = await this.createUseCase.execute(createCategoryDto);
-    return new CategoryPresenter(output);
+    return CategoriesController.categoryToResponse(output);
   }
 
   @Get()
@@ -57,7 +58,7 @@ export class CategoriesController {
   @Get(":id")
   async findOne(@Param("id") id: string) {
     const output = await this.getUseCase.execute({ id });
-    return new CategoryPresenter(output);
+    return CategoriesController.categoryToResponse(output);
   }
 
   @Put(":id")
@@ -70,7 +71,7 @@ export class CategoriesController {
       ...updateCategoryDto,
     });
 
-    return new CategoryPresenter(output);
+    return CategoriesController.categoryToResponse(output);
   }
 
   @HttpCode(204)
@@ -78,5 +79,8 @@ export class CategoriesController {
   delete(@Param("id") id: string) {
     return this.deleteUseCase.execute({ id });
   }
-}
 
+  static categoryToResponse(output: CategoryOutput) {
+    return new CategoryPresenter(output);
+  }
+}

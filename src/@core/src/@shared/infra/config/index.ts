@@ -13,9 +13,9 @@ function makeConfig(envFile: string): Config {
   const { parsed } = readEnv({ path: envFile });
   return {
     db: {
-      vendor: parsed.DB_VENDOR as any,
-      host: parsed.DB_HOST,
-      logging: parsed.DB_LOGGING === "true",
+      vendor: parsed.DB_SQLITE_DIALECT as any,
+      host: parsed.DB_SQLITE_HOST,
+      logging: parsed.DB_SQLITE_LOGGING === "true",
     },
   };
 }

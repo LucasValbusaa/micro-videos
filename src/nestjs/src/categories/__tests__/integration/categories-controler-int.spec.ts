@@ -23,6 +23,7 @@ import {
   ListCategoriesUseCase,
   UpdateCategoryUseCase,
 } from "@micro-videos/core/src/category/application";
+import { CreateCategoryFixture } from "../../fixture";
 
 describe("CategoriesController Integration Tests", () => {
   let controller: CategoriesController;
@@ -57,67 +58,24 @@ describe("CategoriesController Integration Tests", () => {
   });
 
   describe("should create a category", () => {
-    const arrange = [
-      {
-        request: {
-          name: "Movie",
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          description: null,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          is_active: true,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          is_active: false,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          description: null,
-          is_active: true,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          description: null,
-          is_active: false,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          description: "some description",
-          is_active: true,
-        },
-      },
-      {
-        request: {
-          name: "Movie",
-          description: "some description",
-          is_active: false,
-        },
-      },
-    ];
+    const arrange = CreateCategoryFixture.arrangeForSave();
 
-    test.each(arrange)("whit request $request", async ({ request }) => {
-      const presenter = await controller.create(request);
-      const entity = await repository.findById(presenter.id);
+    test.each(arrange)(
+      "whit request $request",
+      async ({ send_data, expected }) => {
+        const presenter = await controller.create(send_data);
+        const entity = await repository.findById(presenter.id);
 
-      expect(entity.toJSON()).toMatchObject(presenter);
-      expect(presenter.toJson()).toStrictEqual(entity.toJSON());
-    });
+        expect(entity.toJSON()).toStrictEqual({
+          id: presenter.id,
+          created_at: presenter.created_at,
+          ...expected,
+          ...send_data,
+        });
+
+        expect(presenter).toEqual(new CategoryPresenter(entity.toJSON()));
+      },
+    );
   });
   describe("should update a category", () => {
     const category = Category.fake().aCategory().build();
@@ -330,4 +288,3 @@ describe("CategoriesController Integration Tests", () => {
     });
   });
 });
-

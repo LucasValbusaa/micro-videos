@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/LucasValbusaa/micro-videos#readme",
   "devDependencies": {
+    "@types/lodash": "^4.14.194",
     "concurrently": "^8.0.1"
   }
 }

@@ -2,7 +2,7 @@ import { Category } from "../../../../domain/entities/category";
 import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory";
 import { ListCategoriesUseCase } from "../../list-categories.use-case";
 import CategoryRepository from "../../../../domain/repository/category.repository";
-import { SearchDirection } from "../../../../../@shared/domain/repositories/pagination/search-params";
+import { SortDirection } from "../../../../../@shared/domain/repositories/pagination/search-params";
 
 describe("ListCategoriesUseCase Unit Tests", () => {
   let useCase: ListCategoriesUseCase.UseCase;
@@ -114,7 +114,7 @@ describe("ListCategoriesUseCase Unit Tests", () => {
       page: 1,
       per_page: 2,
       sort: "name",
-      sort_dir: SearchDirection.DESC,
+      sort_dir: SortDirection.DESC,
       filter: "a",
     });
     expect(output).toStrictEqual({

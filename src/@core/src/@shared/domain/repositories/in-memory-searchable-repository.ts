@@ -1,6 +1,6 @@
 import { Entity } from "../entity";
 import { InMemoryRepository } from "./in-memory-repository";
-import { SearchDirection, SearchParams } from "./pagination";
+import { SortDirection, SearchParams } from "./pagination";
 import { SearchResult } from "./pagination";
 import { SearchableRepositoryInterface } from "./repository-contracts";
 
@@ -49,10 +49,10 @@ export abstract class InMemorySearchableRepository<E extends Entity>
 
     return [...items].sort((a, b) => {
       if (a.props[sort] < b.props[sort]) {
-        return sort_dir === SearchDirection.ASC ? -1 : 1;
+        return sort_dir === SortDirection.ASC ? -1 : 1;
       }
       if (a.props[sort] > b.props[sort]) {
-        return sort_dir === SearchDirection.ASC ? 1 : -1;
+        return sort_dir === SortDirection.ASC ? 1 : -1;
       }
 
       return 0;

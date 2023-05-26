@@ -1,5 +1,5 @@
 import { ListCategoriesUseCase } from "../../list-categories.use-case";
-import { SearchDirection } from "../../../../../@shared/domain/repositories/pagination/search-params";
+import { SortDirection } from "../../../../../@shared/domain/repositories/pagination/search-params";
 import { CategoryModel, CategorySequelizeRepository } from "../../../../infra";
 import { setupSequelize } from "../../../../../@shared/infra";
 import _chance from "chance";
@@ -81,7 +81,7 @@ describe("ListCategoriesUseCase Integration Tests", () => {
       page: 1,
       per_page: 2,
       sort: "name",
-      sort_dir: SearchDirection.DESC,
+      sort_dir: SortDirection.DESC,
       filter: "a",
     });
     expect(output).toStrictEqual({

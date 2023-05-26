@@ -1,10 +1,7 @@
 import { CategoryModel } from "../category-model";
 import { Category, CategoryRepository } from "../../../../../domain";
 import { CategorySequelizeRepository } from "../category-repository";
-import {
-  NotFoundError,
-  SearchDirection,
-} from "../../../../../../@shared/domain";
+import { NotFoundError, SortDirection } from "../../../../../../@shared/domain";
 import { setupSequelize } from "../../../../../../@shared/infra";
 import _chance from "chance";
 import { CategoryModelMapper } from "../category-mapper";
@@ -294,7 +291,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           current_page: 1,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.ASC,
+          sort_dir: SortDirection.ASC,
           filter: null,
         }),
       },
@@ -313,7 +310,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           current_page: 2,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.ASC,
+          sort_dir: SortDirection.ASC,
           filter: null,
         }),
       },
@@ -322,7 +319,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           page: 1,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.DESC,
+          sort_dir: SortDirection.DESC,
         }),
         result: new CategoryRepository.SearchResult({
           items: [
@@ -333,7 +330,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           current_page: 1,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.DESC,
+          sort_dir: SortDirection.DESC,
           filter: null,
         }),
       },
@@ -342,7 +339,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           page: 2,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.DESC,
+          sort_dir: SortDirection.DESC,
         }),
         result: new CategoryRepository.SearchResult({
           items: [
@@ -353,7 +350,7 @@ describe("CategorySequelizeRepository Unit Test", () => {
           current_page: 2,
           per_page: 2,
           sort: "name",
-          sort_dir: SearchDirection.DESC,
+          sort_dir: SortDirection.DESC,
           filter: null,
         }),
       },

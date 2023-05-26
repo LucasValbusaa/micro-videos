@@ -1,6 +1,6 @@
 import { Entity } from "../../entity";
 import { InMemorySearchableRepository } from "../in-memory-searchable-repository";
-import { SearchDirection, SearchParams } from "../pagination";
+import { SortDirection, SearchParams } from "../pagination";
 import { SearchResult } from "../pagination";
 
 type StubEntityProps = {
@@ -211,7 +211,7 @@ describe("InMemorySearchableRepository Unit Tests", () => {
             page: 1,
             per_page: 2,
             sort: "name",
-            sort_dir: SearchDirection.DESC,
+            sort_dir: SortDirection.DESC,
           }),
           result: new SearchResult({
             items: [items[3], items[2]],

@@ -243,7 +243,7 @@ describe("CategoriesController Integration Tests", () => {
   //           page: 1,
   //           per_page: 2,
   //           sort: "name",
-  //           sort_dir: SearchDirection.DESC,
+  //           sort_dir: SortDirection.DESC,
   //           filter: "a",
   //         },
   //         expect: {
@@ -259,7 +259,7 @@ describe("CategoriesController Integration Tests", () => {
   //           page: 2,
   //           per_page: 2,
   //           sort: "name",
-  //           sort_dir: SearchDirection.DESC,
+  //           sort_dir: SortDirection.DESC,
   //           filter: "a",
   //         },
   //         expect: {

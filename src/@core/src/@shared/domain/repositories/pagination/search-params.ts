@@ -1,4 +1,4 @@
-export enum SearchDirection {
+export enum SortDirection {
   ASC = "asc",
   DESC = "desc",
 }
@@ -7,7 +7,7 @@ export type SearchParamsProps<Filter = string> = {
   page?: number;
   per_page?: number;
   sort?: string | null;
-  sort_dir?: SearchDirection | null;
+  sort_dir?: SortDirection | null;
   filter?: Filter | null;
 };
 
@@ -47,16 +47,16 @@ export class SearchParams<Filter = string> {
     );
   }
 
-  private validateSortDir(value: SearchDirection) {
+  private validateSortDir(value: SortDirection) {
     if (!this.props.sort) {
       this.props.sort_dir = null;
       return;
     }
 
-    const dir = `${value}`.toLowerCase() as SearchDirection;
+    const dir = `${value}`.toLowerCase() as SortDirection;
     this.props.sort_dir =
-      dir !== SearchDirection.ASC && dir !== SearchDirection.DESC
-        ? SearchDirection.ASC
+      dir !== SortDirection.ASC && dir !== SortDirection.DESC
+        ? SortDirection.ASC
         : dir;
   }
 

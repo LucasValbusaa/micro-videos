@@ -1,4 +1,4 @@
-import { SearchDirection } from "../pagination";
+import { SortDirection } from "../pagination";
 
 export function stubSearchParamsNumberToValidate(defaultExpectedValue: number) {
   return [
@@ -30,18 +30,18 @@ export const stubSearchParamsStringToValidate = [
 ];
 
 export const stubSortDirParamsValidate = [
-  { received: null, expected: SearchDirection.ASC },
-  { received: undefined, expected: SearchDirection.ASC },
-  { received: "", expected: SearchDirection.ASC },
-  { received: 0, expected: SearchDirection.ASC },
-  { received: -1, expected: SearchDirection.ASC },
-  { received: 5.5, expected: SearchDirection.ASC },
-  { received: true, expected: SearchDirection.ASC },
-  { received: false, expected: SearchDirection.ASC },
-  { received: {}, expected: SearchDirection.ASC },
+  { received: null, expected: SortDirection.ASC },
+  { received: undefined, expected: SortDirection.ASC },
+  { received: "", expected: SortDirection.ASC },
+  { received: 0, expected: SortDirection.ASC },
+  { received: -1, expected: SortDirection.ASC },
+  { received: 5.5, expected: SortDirection.ASC },
+  { received: true, expected: SortDirection.ASC },
+  { received: false, expected: SortDirection.ASC },
+  { received: {}, expected: SortDirection.ASC },
 
-  { received: "ASC", expected: SearchDirection.ASC },
-  { received: "asc", expected: SearchDirection.ASC },
-  { received: "DESC", expected: SearchDirection.DESC },
-  { received: "desc", expected: SearchDirection.DESC },
+  { received: "ASC", expected: SortDirection.ASC },
+  { received: "asc", expected: SortDirection.ASC },
+  { received: "DESC", expected: SortDirection.DESC },
+  { received: "desc", expected: SortDirection.DESC },
 ];

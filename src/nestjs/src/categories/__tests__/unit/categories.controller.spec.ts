@@ -6,7 +6,7 @@ import {
   ListCategoriesUseCase,
 } from "@micro-videos/core/src/category/application";
 import { UpdateCategoryDto } from "../../dto/update-category.dto";
-import { SearchDirection } from "@micro-videos/core/src/@shared/domain";
+import { SortDirection } from "@micro-videos/core/src/@shared/domain";
 import {
   CategoryCollectionPresenter,
   CategoryPresenter,
@@ -149,7 +149,7 @@ describe("CategoriesController Unit Tests", () => {
       page: 1,
       per_page: 2,
       sort: "name",
-      sort_dir: "desc" as SearchDirection,
+      sort_dir: "desc" as SortDirection,
       filter: "test",
     };
     const presenter = await controller.search(searchParams);

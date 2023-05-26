@@ -12,4 +12,6 @@
 - ✔️ Integration with database and Sequelize
 - ✔️ Create Configuration Environment
 - ✔️ Create Presenter Layer and CategoryFakeBuilder
-- ❌ Create tests end-to-end
+- ✔️ Create tests end-to-end
+- ✔️ Add Mysql DB
+- ❌ Add Sequelize Migrations

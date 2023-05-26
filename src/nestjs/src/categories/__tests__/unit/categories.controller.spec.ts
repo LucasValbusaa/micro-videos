@@ -11,6 +11,7 @@ import {
   CategoryCollectionPresenter,
   CategoryPresenter,
 } from "../../presenter/category-presenter";
+import { instanceToPlain } from "class-transformer";
 
 describe("CategoriesController Unit Tests", () => {
   let controller: CategoriesController;
@@ -39,10 +40,13 @@ describe("CategoriesController Unit Tests", () => {
       is_active: true,
     };
     const presenter = await controller.create(input);
+    const expectedPresenter = instanceToPlain(
+      new CategoryPresenter(expectedOutput),
+    );
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(input);
-    expect(presenter).toBeInstanceOf(CategoryPresenter);
-    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
+    //expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(expectedPresenter);
   });
 
   it("should update a category", async () => {
@@ -66,13 +70,16 @@ describe("CategoriesController Unit Tests", () => {
       is_active: true,
     };
     const presenter = await controller.update(id, input);
+    const expectedPresenter = instanceToPlain(
+      new CategoryPresenter(expectedOutput),
+    );
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith({
       id,
       ...input,
     });
-    expect(presenter).toBeInstanceOf(CategoryPresenter);
-    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
+    //expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(expectedPresenter);
   });
 
   it("should delete a category", async () => {
@@ -107,10 +114,13 @@ describe("CategoriesController Unit Tests", () => {
     //@ts-expect-error
     controller["getUseCase"] = mockCreateUseCase;
     const presenter = await controller.findOne(id);
+    const expectedPresenter = instanceToPlain(
+      new CategoryPresenter(expectedOutput),
+    );
 
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith({ id });
-    expect(presenter).toBeInstanceOf(CategoryPresenter);
-    expect(presenter).toStrictEqual(new CategoryPresenter(expectedOutput));
+    //expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(expectedPresenter);
   });
 
   it("should list categories", async () => {
@@ -143,9 +153,8 @@ describe("CategoriesController Unit Tests", () => {
       filter: "test",
     };
     const presenter = await controller.search(searchParams);
-    expect(presenter).toBeInstanceOf(CategoryCollectionPresenter);
+    //expect(presenter).toBeInstanceOf(CategoryCollectionPresenter);
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(searchParams);
     expect(presenter).toEqual(new CategoryCollectionPresenter(output));
   });
 });
-

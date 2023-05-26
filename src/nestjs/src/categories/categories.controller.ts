@@ -9,6 +9,7 @@ import {
   Delete,
   HttpCode,
   Query,
+  ParseUUIDPipe,
 } from "@nestjs/common";
 import {
   CreateCategoryUseCase,
@@ -57,14 +58,14 @@ export class CategoriesController {
   }
 
   @Get(":id")
-  async findOne(@Param("id") id: string) {
+  async findOne(@Param("id", new ParseUUIDPipe()) id: string) {
     const output = await this.getUseCase.execute({ id });
     return CategoriesController.categoryToResponse(output);
   }
 
   @Put(":id")
   async update(
-    @Param("id") id: string,
+    @Param("id", new ParseUUIDPipe()) id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
     const output = await this.updateUseCase.execute({
@@ -77,7 +78,7 @@ export class CategoriesController {
 
   @HttpCode(204)
   @Delete(":id")
-  delete(@Param("id") id: string) {
+  delete(@Param("id", new ParseUUIDPipe()) id: string) {
     return this.deleteUseCase.execute({ id });
   }
 

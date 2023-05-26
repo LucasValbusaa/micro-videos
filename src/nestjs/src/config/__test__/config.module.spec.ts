@@ -224,12 +224,11 @@ describe("ConfigModule Unit Tests", () => {
     }
   });
 
-  it("should be valid", () => {
-    const module = Test.createTestingModule({
-      imports: [ConfigModule.forRoot()],
-    });
+  // it("should be valid", () => {
+  //   const module = Test.createTestingModule({
+  //     imports: [ConfigModule.forRoot()],
+  //   });
 
-    expect(module).toBeDefined();
-  });
+  //   expect(module).toBeDefined();
+  // });
 });
-

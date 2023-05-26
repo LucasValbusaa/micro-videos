@@ -1,7 +1,4 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { INestApplication } from "@nestjs/common";
 import request from "supertest";
-import { AppModule } from "./../../src/app.module";
 import {
   CreateCategoryFixture,
   UpdateCategoryFixture,
@@ -13,35 +10,44 @@ import {
 import { CATEGORY_PROVIDERS } from "../../src/categories/categories.providers";
 import { CategoriesController } from "../../src/categories/categories.controller";
 import { instanceToPlain } from "class-transformer";
-import { applyGlobalConfig } from "../../src/global-configs";
-
-function startApp({
-  beforeInit,
-}: { beforeInit?: (app: INestApplication) => void } = {}) {
-  let _app: INestApplication;
-
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    _app = moduleFixture.createNestApplication();
-    applyGlobalConfig(_app);
-    beforeInit && beforeInit(_app);
-    await _app.init();
-  });
-
-  return {
-    get app() {
-      return _app;
-    },
-  };
-}
+import { startApp } from "../../src/@shared/testing/helper";
 
 describe("CategoriesController (e2e)", () => {
-  const uuid = "5982cad0-20d3-4b66-b648-c82c799ea2f6";
-  describe("PUT /categories/:id", () => {
+  describe("/categories/:id (PUT)", () => {
+    const uuid = "5982cad0-20d3-4b66-b648-c82c799ea2f6";
     const nestServer = startApp();
+
+    describe("should a response error when id is invalid or not found", () => {
+      const arrange = [
+        {
+          id: uuid,
+          send_data: { name: "test" },
+          expected: {
+            statusCode: 404,
+            message: `Entity not found using ID ${uuid}`,
+            error: "Not Found",
+          },
+        },
+        {
+          id: "fake id",
+          send_data: { name: "test" },
+          expected: {
+            statusCode: 400,
+            message: "Validation failed (uuid  is expected)",
+            error: "Bad Request",
+          },
+        },
+      ];
+
+      test.each(arrange)("when id is $id", ({ id, send_data, expected }) => {
+        return request(nestServer.app.getHttpServer())
+          .put(`/categories/${id}`)
+          .send(send_data)
+          .expect(expected.statusCode)
+          .expect(expected);
+      });
+    });
+
     describe("should a response error with 422 when request body is invalid", () => {
       const invalidRequest = CreateCategoryFixture.arrangeInvalidRequest();
       const arrange = Object.keys(invalidRequest).map((key) => ({
@@ -88,40 +94,7 @@ describe("CategoriesController (e2e)", () => {
       });
     });
 
-    describe("should a response error when id is invalid or not found", () => {
-      const nestServer = startApp();
-      const arrange = [
-        {
-          id: uuid,
-          send_data: { name: "test" },
-          expected: {
-            statusCode: 404,
-            message: `Entity not found using ID ${uuid}`,
-            error: "Not Found",
-          },
-        },
-        // {
-        //   id: "fake id",
-        //   send_data: { name: "test" },
-        //   expected: {
-        //     statusCode: 400,
-        //     message: "Validation failed (uuid is expected)",
-        //     error: "Bad Request",
-        //   },
-        // },
-      ];
-
-      test.each(arrange)("when id is $id", ({ id, send_data, expected }) => {
-        return request(nestServer.app.getHttpServer())
-          .put(`/categories/${id}`)
-          .send(send_data)
-          .expect(expected.statusCode)
-          .expect(expected);
-      });
-    });
-
     describe("should update a category", () => {
-      const nestServer = startApp();
       const arrange = CreateCategoryFixture.arrangeForSave();
       let categoryRepo: CategoryRepository.Repository;
       beforeEach(() => {

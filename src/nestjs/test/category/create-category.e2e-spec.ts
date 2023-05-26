@@ -1,39 +1,13 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { INestApplication } from "@nestjs/common";
 import request from "supertest";
-import { AppModule } from "./../../src/app.module";
 import { CreateCategoryFixture } from "../../src/categories/fixture";
 import { CategoryRepository } from "@micro-videos/core/src/category/domain";
 import { CATEGORY_PROVIDERS } from "../../src/categories/categories.providers";
 import { CategoriesController } from "../../src/categories/categories.controller";
 import { instanceToPlain } from "class-transformer";
-import { applyGlobalConfig } from "../../src/global-configs";
-
-function startApp({
-  beforeInit,
-}: { beforeInit?: (app: INestApplication) => void } = {}) {
-  let _app: INestApplication;
-
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    _app = moduleFixture.createNestApplication();
-    applyGlobalConfig(_app);
-    beforeInit && beforeInit(_app);
-    await _app.init();
-  });
-
-  return {
-    get app() {
-      return _app;
-    },
-  };
-}
+import { startApp } from "../../src/@shared/testing/helper";
 
 describe("CategoriesController (e2e)", () => {
-  describe("POST /categories", () => {
+  describe("/categories (POST)", () => {
     const nestServer = startApp();
     describe("should a response error with 422 when request body is invalid", () => {
       const invalidRequest = CreateCategoryFixture.arrangeInvalidRequest();

@@ -29,7 +29,7 @@ describe("CategoryPresenter Unit Test", () => {
     const data = instanceToPlain(presenter);
     expect(data).toStrictEqual({
       ...input,
-      created_at: created_at.toISOString(),
+      created_at: created_at.toISOString().slice(0, 19) + ".000Z",
     });
   });
 });
@@ -63,7 +63,7 @@ describe("CategoryCollectionPresenter Unit Test", () => {
       data: [
         {
           ...makeInputDataPresenter(),
-          created_at: created_at.toISOString(),
+          created_at: created_at.toISOString().slice(0, 19) + ".000Z",
         },
       ],
     });
@@ -78,10 +78,9 @@ describe("CategoryCollectionPresenter Unit Test", () => {
       data: [
         {
           ...makeInputDataPresenter(),
-          created_at: created_at.toISOString(),
+          created_at: created_at.toISOString().slice(0, 19) + ".000Z",
         },
       ],
     });
   });
 });
-

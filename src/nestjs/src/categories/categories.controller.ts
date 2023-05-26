@@ -25,6 +25,7 @@ import {
   CategoryCollectionPresenter,
   CategoryPresenter,
 } from "./presenter/category-presenter";
+import { instanceToPlain } from "class-transformer";
 
 @Controller("categories")
 export class CategoriesController {
@@ -81,6 +82,6 @@ export class CategoriesController {
   }
 
   static categoryToResponse(output: CategoryOutput) {
-    return new CategoryPresenter(output);
+    return instanceToPlain(new CategoryPresenter(output));
   }
 }

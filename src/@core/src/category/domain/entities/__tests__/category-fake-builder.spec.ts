@@ -1,35 +1,36 @@
 import { Chance } from "chance";
 import { CategoryFakeBuilder } from "../category-fake-builder";
 import { UniqueId } from "../../../../@shared/domain";
+import { CategoryId } from "../category";
 
 describe("CategoryFakerBuilder Unit Tests", () => {
-  describe("unique_entity_id prop", () => {
+  describe("entity_id prop", () => {
     const faker = CategoryFakeBuilder.aCategory();
     it("should be undefined", () => {
-      expect(faker["_unique_entity_id"]).toBeUndefined();
+      expect(faker["_entity_id"]).toBeUndefined();
     });
 
-    test("withUniqueEntityId", () => {
+    test("withEntityId", () => {
       const uniqueId = new UniqueId();
-      const $this = faker.withUniqueEntityId(uniqueId);
+      const $this = faker.withEntityId(uniqueId);
       expect($this).toBeInstanceOf(CategoryFakeBuilder);
-      expect(faker["_unique_entity_id"]).toBe(uniqueId);
+      expect(faker["_entity_id"]).toBe(uniqueId);
 
-      faker.withUniqueEntityId(() => uniqueId);
-      expect(faker["_unique_entity_id"]()).toBe(uniqueId);
+      faker.withEntityId(() => uniqueId);
+      expect(faker["_entity_id"]()).toBe(uniqueId);
 
-      expect(faker.unique_entity_id).toBe(uniqueId);
+      expect(faker.entity_id).toBe(uniqueId);
     });
 
     it("should pass index to unique_entity_id factory", () => {
       let mockFactory = jest.fn().mockReturnValue(new UniqueId());
-      faker.withUniqueEntityId(mockFactory);
+      faker.withEntityId(mockFactory);
       faker.build();
       expect(mockFactory).toHaveBeenCalledWith(0);
 
       mockFactory = jest.fn().mockReturnValue(new UniqueId());
       const fakerMany = CategoryFakeBuilder.theCategories(2);
-      fakerMany.withUniqueEntityId(mockFactory);
+      fakerMany.withEntityId(mockFactory);
       fakerMany.build();
 
       expect(mockFactory).toHaveBeenCalledWith(0);
@@ -95,10 +96,10 @@ describe("CategoryFakerBuilder Unit Tests", () => {
     });
 
     test("invalid to long case", () => {
-      faker.withInvalidNameToLong();
+      faker.withInvalidNameTooLong();
       expect(faker["_name"].length).toBe(256);
 
-      faker.withInvalidNameToLong("a".repeat(500));
+      faker.withInvalidNameTooLong("a".repeat(500));
       expect(faker["_name"].length).toBe(500);
     });
   });
@@ -223,29 +224,27 @@ describe("CategoryFakerBuilder Unit Tests", () => {
     const faker = CategoryFakeBuilder.aCategory();
     let category = faker.build();
 
-    expect(category.id).toBeInstanceOf(UniqueId);
+    expect(category.id).toBeInstanceOf(CategoryId);
     expect(typeof category.name === "string").toBeTruthy();
     expect(typeof category.description === "string").toBeTruthy();
     expect(category.is_active).toBeTruthy();
     expect(category.created_at).toBeInstanceOf(Date);
 
     const created_at = new Date();
-    const uniqueId = new UniqueId();
+    const categoryId = new CategoryId();
     category = faker
-      .withUniqueEntityId(uniqueId)
-      .withName("Movie")
-      .withDescription("some description")
-      .activate()
+      .withEntityId(categoryId)
+      .withName("name test")
+      .withDescription("description test")
+      .deactivate()
       .withCreatedAt(created_at)
       .build();
 
-    expect(category.toJSON()).toStrictEqual({
-      id: uniqueId,
-      name: "Movie",
-      description: "some description",
-      is_active: true,
-      created_at,
-    });
+    expect(category.id.value).toBe(categoryId.value);
+    expect(category.name).toBe("name test");
+    expect(category.description).toBe("description test");
+    expect(category.is_active).toBeFalsy();
+    expect(category.props.created_at).toEqual(created_at);
   });
 
   it("should create many categories", () => {
@@ -253,7 +252,7 @@ describe("CategoryFakerBuilder Unit Tests", () => {
     let categories = faker.build();
 
     categories.forEach((category) => {
-      expect(category.id).toBeInstanceOf(UniqueId);
+      expect(category.id).toBeInstanceOf(CategoryId);
       expect(typeof category.name === "string").toBeTruthy();
       expect(typeof category.description === "string").toBeTruthy();
       expect(category.is_active).toBeTruthy();
@@ -261,23 +260,21 @@ describe("CategoryFakerBuilder Unit Tests", () => {
     });
 
     const created_at = new Date();
-    const uniqueId = new UniqueId();
+    const categoryId = new CategoryId();
     categories = faker
-      .withUniqueEntityId(uniqueId)
-      .withName("Movie")
-      .withDescription("some description")
-      .activate()
+      .withEntityId(categoryId)
+      .withName("name test")
+      .withDescription("description test")
+      .deactivate()
       .withCreatedAt(created_at)
       .build();
 
     categories.forEach((category) => {
-      expect(category.toJSON()).toStrictEqual({
-        id: uniqueId,
-        name: "Movie",
-        description: "some description",
-        is_active: true,
-        created_at,
-      });
+      expect(category.id.value).toBe(categoryId.value);
+      expect(category.name).toBe("name test");
+      expect(category.description).toBe("description test");
+      expect(category.is_active).toBeFalsy();
+      expect(category.props.created_at).toEqual(created_at);
     });
   });
 });

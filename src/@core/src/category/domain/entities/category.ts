@@ -3,6 +3,7 @@ import { Entity } from "../../../@shared/domain/entity/entity";
 import { UniqueId } from "../../../@shared/domain/value-object/unique-id";
 import CategoryValidatorFactory from "../validator/category.validator";
 import { CategoryFakeBuilder } from "./category-fake-builder";
+import { extend } from "lodash";
 
 export type CategoryProps = {
   name: string;
@@ -11,17 +12,21 @@ export type CategoryProps = {
   created_at?: Date;
 };
 
+export type CategoryPropsJson = Required<{ id: string } & CategoryProps>;
+
 export type UpdateCategoryProps = {
   name: string;
   description: string;
 };
 
-export class Category extends Entity<CategoryProps> {
-  constructor(props: CategoryProps, id?: UniqueId) {
+export class CategoryId extends UniqueId {}
+
+export class Category extends Entity<CategoryProps, CategoryPropsJson> {
+  constructor(props: CategoryProps, entity_id?: CategoryId) {
     Category.validate(props);
     const { description, is_active, created_at } = props;
 
-    super(props, id);
+    super(props, entity_id ?? new CategoryId());
     this.description = description;
     this.is_active = is_active;
     this.created_at = created_at;
@@ -94,5 +99,15 @@ export class Category extends Entity<CategoryProps> {
 
   static fake() {
     return CategoryFakeBuilder;
+  }
+
+  toJSON(): CategoryPropsJson {
+    return {
+      id: this.id.value,
+      name: this.name,
+      description: this.description,
+      is_active: this.is_active,
+      created_at: this.created_at,
+    };
   }
 }

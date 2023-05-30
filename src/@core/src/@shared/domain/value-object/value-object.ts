@@ -1,4 +1,5 @@
 import { deepFreeze } from "../utils";
+import isEqual from "lodash/isEqual";
 
 export abstract class ValueObject<Value = any> {
   public readonly value: Value;
@@ -6,6 +7,23 @@ export abstract class ValueObject<Value = any> {
   constructor(value: Value) {
     this.value = deepFreeze(value);
   }
+
+  equals(obj: this): boolean {
+    if (obj === null || obj === undefined) {
+      return false;
+    }
+
+    if (obj.value === undefined) {
+      return false;
+    }
+
+    if (obj.constructor.name !== this.constructor.name) {
+      return false;
+    }
+
+    return isEqual(this.value, obj.value);
+  }
+
   toString = () => {
     if (typeof this.value !== "object" || this.value === null) {
       try {

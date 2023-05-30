@@ -15,6 +15,14 @@ class StubEntity extends Entity<stubProps> {
   get _props() {
     return this.props;
   }
+
+  toJSON(): Required<{ id: string }> & stubProps {
+    return {
+      id: this.id.value,
+      prop1: this.props.prop1,
+      prop2: this.props.prop2,
+    };
+  }
 }
 
 describe("Entity Unit Test", () => {

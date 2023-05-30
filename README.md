@@ -15,4 +15,5 @@
 - ✔️ Create tests end-to-end
 - ✔️ Add Mysql DB
 - ✔️ Add Sequelize Migrations
+- ✔️ Refactors to add new entities
 - ❌ Create Entity Cast Member

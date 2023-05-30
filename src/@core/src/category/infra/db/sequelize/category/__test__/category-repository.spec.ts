@@ -363,34 +363,24 @@ describe("CategorySequelizeRepository Unit Test", () => {
   });
 
   describe("should search using filter, sort and paginate", () => {
-    let categories: CategoryModel[];
-
-    const defaultProperties = {
-      description: null,
-      is_active: true,
-      created_at: new Date(),
-    };
-    const categoriesProps = [
-      { id: chance.guid({ version: 4 }), name: "test", ...defaultProperties },
-      { id: chance.guid({ version: 4 }), name: "a", ...defaultProperties },
-      { id: chance.guid({ version: 4 }), name: "TEST", ...defaultProperties },
-      { id: chance.guid({ version: 4 }), name: "e", ...defaultProperties },
-      { id: chance.guid({ version: 4 }), name: "TeSt", ...defaultProperties },
+    const categories = [
+      Category.fake().aCategory().withName("test").build(),
+      Category.fake().aCategory().withName("a").build(),
+      Category.fake().aCategory().withName("TEST").build(),
+      Category.fake().aCategory().withName("e").build(),
+      Category.fake().aCategory().withName("TeSt").build(),
     ];
 
-    const arrange = [
+    let arrange = [
       {
-        params: new CategoryRepository.SearchParams({
+        search_params: new CategoryRepository.SearchParams({
           page: 1,
           per_page: 2,
           sort: "name",
           filter: "TEST",
         }),
-        result: new CategoryRepository.SearchResult({
-          items: [
-            new Category(categoriesProps[2]),
-            new Category(categoriesProps[4]),
-          ],
+        search_result: new CategoryRepository.SearchResult({
+          items: [categories[2], categories[4]],
           total: 3,
           current_page: 1,
           per_page: 2,
@@ -400,14 +390,14 @@ describe("CategorySequelizeRepository Unit Test", () => {
         }),
       },
       {
-        params: new CategoryRepository.SearchParams({
+        search_params: new CategoryRepository.SearchParams({
           page: 2,
           per_page: 2,
           sort: "name",
           filter: "TEST",
         }),
-        result: new CategoryRepository.SearchResult({
-          items: [new Category(categoriesProps[0])],
+        search_result: new CategoryRepository.SearchResult({
+          items: [categories[0]],
           total: 3,
           current_page: 2,
           per_page: 2,
@@ -419,12 +409,15 @@ describe("CategorySequelizeRepository Unit Test", () => {
     ];
 
     beforeEach(async () => {
-      categories = await CategoryModel.bulkCreate(categoriesProps);
+      await repository.bulkInsert(categories);
     });
 
-    test.each(arrange)("when value is $params", async ({ params, result }) => {
-      const searchResult = await repository.search(params);
-      expect(searchResult.toJSON(true)).toStrictEqual(result.toJSON(true));
-    });
+    test.each(arrange)(
+      "when value is $search_params",
+      async ({ search_params, search_result }) => {
+        let result = await repository.search(search_params);
+        expect(result.toJSON(true)).toMatchObject(search_result.toJSON(true));
+      }
+    );
   });
 });

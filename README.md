@@ -14,4 +14,5 @@
 - ✔️ Create Presenter Layer and CategoryFakeBuilder
 - ✔️ Create tests end-to-end
 - ✔️ Add Mysql DB
-- ❌ Add Sequelize Migrations
+- ✔️ Add Sequelize Migrations
+- ❌ Create Entity Cast Member

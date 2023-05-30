@@ -4,12 +4,17 @@ import { SortDirection, SearchParams } from "./pagination";
 import { SearchResult } from "./pagination";
 import { SearchableRepositoryInterface } from "./repository-contracts";
 
-export abstract class InMemorySearchableRepository<E extends Entity>
+export abstract class InMemorySearchableRepository<
+    E extends Entity,
+    Filter = string
+  >
   extends InMemoryRepository<E>
-  implements SearchableRepositoryInterface<E>
+  implements SearchableRepositoryInterface<E, Filter>
 {
   sortableFields: string[] = [];
-  async search({ props }: SearchParams): Promise<SearchResult<E>> {
+  async search({
+    props,
+  }: SearchParams<Filter>): Promise<SearchResult<E, Filter>> {
     const itemsFilter = await this.applyFilter(this.items, props.filter);
     const itemsSorted = await this.applySort(
       itemsFilter,
@@ -35,7 +40,7 @@ export abstract class InMemorySearchableRepository<E extends Entity>
 
   protected abstract applyFilter(
     items: E[],
-    filter: string | null
+    filter: Filter | null
   ): Promise<E[]>;
 
   protected async applySort(

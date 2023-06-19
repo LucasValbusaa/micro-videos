@@ -24,6 +24,7 @@ export class SearchResult<E extends Entity = Entity, Filter = string> {
         ? this.props.items.map((item) => item.toJSON())
         : this.props.items,
       last_page: this.last_page,
+      filter: this.props.filter as any,
     };
   }
 }

@@ -1,10 +1,12 @@
 import { Entity } from "../entity";
 import { NotFoundError } from "../errors";
-import { UniqueId } from "../value-object";
+import { UniqueId, ValueObject } from "../value-object";
 import { RepositoryInterface } from "./repository-contracts";
 
-export abstract class InMemoryRepository<E extends Entity>
-  implements RepositoryInterface<E>
+export abstract class InMemoryRepository<
+  E extends Entity,
+  EntityId extends ValueObject
+> implements RepositoryInterface<E, EntityId>
 {
   items: E[] = [];
 
@@ -15,7 +17,7 @@ export abstract class InMemoryRepository<E extends Entity>
     this.items.push(...entities);
   }
 
-  async findById(id: string | UniqueId): Promise<E> {
+  async findById(id: string | EntityId): Promise<E> {
     const _id = `${id}`;
     return this._get(_id);
   }
@@ -23,13 +25,13 @@ export abstract class InMemoryRepository<E extends Entity>
     return this.items;
   }
   async update(entity: E): Promise<void> {
-    await this._get(entity.id);
+    await this._get(entity.id.value);
     const indexFound = this.items.findIndex(
       (item) => item.id.toString() === entity.id.toString()
     );
     this.items[indexFound] = entity;
   }
-  async delete(id: string | UniqueId): Promise<void> {
+  async delete(id: string | EntityId): Promise<void> {
     const _id = `${id}`;
     await this._get(_id);
     const indexFound = this.items.findIndex(
@@ -38,7 +40,7 @@ export abstract class InMemoryRepository<E extends Entity>
     this.items.splice(indexFound, 1);
   }
 
-  protected async _get(id: string | UniqueId): Promise<E> {
+  protected async _get(id: string | EntityId): Promise<E> {
     const entity = this.items.find(
       (item) => item.id.toString() === id.toString()
     );

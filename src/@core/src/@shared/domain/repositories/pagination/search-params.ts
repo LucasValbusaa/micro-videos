@@ -3,7 +3,7 @@ export enum SortDirection {
   DESC = "desc",
 }
 
-export type SearchParamsProps<Filter = string> = {
+export type SearchProps<Filter = string> = {
   page?: number;
   per_page?: number;
   sort?: string | null;
@@ -15,7 +15,7 @@ export class SearchParams<Filter = string> {
   private DEFAULT_PAGE_VALUE = 1;
   private DEFAULT_PER_PAGE_VALUE = 15;
 
-  constructor(public readonly props: SearchParamsProps<Filter> = {}) {
+  constructor(public readonly props: SearchProps<Filter> = {}) {
     this.validatePage(props.page);
     this.validatePerPage(props.per_page);
     this.validateSortDir(props.sort_dir);

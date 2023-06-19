@@ -1,4 +1,5 @@
 import { Entity } from "../entity";
+import { ValueObject } from "../value-object";
 import { InMemoryRepository } from "./in-memory-repository";
 import { SortDirection, SearchParams } from "./pagination";
 import { SearchResult } from "./pagination";
@@ -6,10 +7,11 @@ import { SearchableRepositoryInterface } from "./repository-contracts";
 
 export abstract class InMemorySearchableRepository<
     E extends Entity,
+    EntityId extends ValueObject,
     Filter = string
   >
-  extends InMemoryRepository<E>
-  implements SearchableRepositoryInterface<E, Filter>
+  extends InMemoryRepository<E, EntityId>
+  implements SearchableRepositoryInterface<E, EntityId, Filter>
 {
   sortableFields: string[] = [];
   async search({

@@ -1,6 +1,6 @@
 import { Either } from "../../../@shared/domain/utils/either";
 import { ValueObject } from "../../../@shared/domain";
-import { InvalidCastMemberTypeError } from "../../errors";
+import { InvalidCastMemberTypeError } from "../errors";
 
 export enum Types {
   DIRECTOR = 1,

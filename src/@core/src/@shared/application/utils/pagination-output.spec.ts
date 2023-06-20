@@ -13,9 +13,13 @@ describe("PaginationOutputMapper", () => {
       filter: null,
     });
 
-    const output = PaginationOutputMapper.toOutput(result);
+    const output = PaginationOutputMapper.toOutput(
+      result.toJSON().items,
+      result
+    );
 
     expect(output).toStrictEqual({
+      items: result.toJSON().items,
       total: 1,
       current_page: 1,
       last_page: 1,

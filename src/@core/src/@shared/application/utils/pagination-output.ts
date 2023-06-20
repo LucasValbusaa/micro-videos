@@ -2,15 +2,17 @@ import { SearchResult } from "../../domain/repositories/pagination/search-result
 import { PaginationOutputDTO } from "../dto";
 
 export class PaginationOutputMapper {
-  static toOutput(
-    searchResult: SearchResult
-  ): Omit<PaginationOutputDTO, "items"> {
-    const result = searchResult.toJSON();
+  static toOutput<Item = any, Filter = any>(
+    items: Item[],
+    props: SearchResult<any, Filter>
+  ): PaginationOutputDTO<Item> {
+    const { total, current_page, last_page, per_page } = props.toJSON();
     return {
-      total: result.total,
-      current_page: result.current_page,
-      last_page: result.last_page,
-      per_page: result.per_page,
+      items,
+      total: total,
+      current_page: current_page,
+      last_page: last_page,
+      per_page: per_page,
     };
   }
 }

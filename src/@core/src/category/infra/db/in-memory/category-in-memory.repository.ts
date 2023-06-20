@@ -1,9 +1,9 @@
 import CategoryRepository from "../../../domain/repository/category.repository";
 import { InMemorySearchableRepository } from "../../../../@shared/domain/repositories/in-memory-searchable-repository";
-import { Category } from "../../../domain/entities/category";
+import { Category, CategoryId } from "../../../domain/entities/category";
 
 export class CategoryInMemoryRepository
-  extends InMemorySearchableRepository<Category>
+  extends InMemorySearchableRepository<Category, CategoryId>
   implements CategoryRepository.Repository
 {
   sortableFields: string[] = ["name", "created_at"];

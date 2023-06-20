@@ -69,13 +69,13 @@ export namespace CastMemberRepository {
     toJSON(forceEntity = false) {
       const props = super.toJSON(forceEntity);
       return {
-        ...props,
         filter: props.filter
           ? {
               ...(props.filter.name && { name: props.filter.name }),
               ...(props.filter.type && { type: props.filter.type.value }),
             }
           : null,
+        ...props,
       };
     }
   }

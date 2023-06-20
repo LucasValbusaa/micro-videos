@@ -1,4 +1,4 @@
-import { Category } from "../entities/category";
+import { Category, CategoryId } from "../entities/category";
 import { SearchableRepositoryInterface } from "../../../@shared/domain/repositories/repository-contracts";
 import {
   SearchParams as DefaultSearchParams,
@@ -15,6 +15,7 @@ export namespace CategoryRepository {
   export interface Repository
     extends SearchableRepositoryInterface<
       Category,
+      CategoryId,
       Filter,
       SearchParams,
       SearchResult

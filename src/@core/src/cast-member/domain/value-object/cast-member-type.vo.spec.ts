@@ -1,4 +1,4 @@
-import { InvalidCastMemberTypeError } from "../../errors";
+import { InvalidCastMemberTypeError } from "../errors";
 import { CastMemberType, Types } from "./cast-member-type.vo";
 
 describe("CastMemberType Unit Tests", () => {

@@ -22,10 +22,7 @@ export namespace ListCategoriesUseCase {
       const items = searchResult
         .toJSON()
         .items.map((i: any) => CategoryOutputMapper.toOutput(i));
-      return {
-        items,
-        ...PaginationOutputMapper.toOutput(searchResult),
-      };
+      return PaginationOutputMapper.toOutput(items, searchResult);
     }
   }
 

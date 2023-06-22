@@ -1,3 +1,4 @@
+import { UniqueId } from "../../value-object";
 import { Entity } from "../../entity";
 import { InMemorySearchableRepository } from "../in-memory-searchable-repository";
 import { SortDirection, SearchParams } from "../pagination";
@@ -18,7 +19,10 @@ class StubEntity extends Entity<StubEntityProps> {
   }
 }
 
-class StubInMemorySearchableRepository extends InMemorySearchableRepository<StubEntity> {
+class StubInMemorySearchableRepository extends InMemorySearchableRepository<
+  StubEntity,
+  UniqueId
+> {
   sortableFields: string[] = ["name"];
 
   protected async applyFilter(

@@ -18,7 +18,7 @@ class StubEntity extends Entity<StubEntityProps> {
   }
 }
 
-class StubInMemoryRepository extends InMemoryRepository<StubEntity> {}
+class StubInMemoryRepository extends InMemoryRepository<StubEntity, UniqueId> {}
 
 function createStubEntity(): StubEntity {
   return new StubEntity({ name: "some name", price: 5 });

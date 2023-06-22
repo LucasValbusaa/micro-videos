@@ -1,1 +1,3 @@
-export * from "./cast-member-in-memory";
+// created from 'create-ts-index'
+
+export * from './cast-member-in-memory';

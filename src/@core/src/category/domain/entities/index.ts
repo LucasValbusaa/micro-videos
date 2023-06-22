@@ -1,2 +1,4 @@
-export * from "./category";
-export * from "./category-fake-builder";
+// created from 'create-ts-index'
+
+export * from './category-fake-builder';
+export * from './category';

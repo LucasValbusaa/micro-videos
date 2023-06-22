@@ -1,1 +1,3 @@
-export * from "./category.repository";
+// created from 'create-ts-index'
+
+export * from './category.repository';

@@ -1,1 +1,3 @@
-export * from "./cast-member.repository";
+// created from 'create-ts-index'
+
+export * from './cast-member.repository';

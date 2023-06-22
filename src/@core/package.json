@@ -9,7 +9,10 @@
     "./src/@shared/infra": "./dist/@shared/infra/index.js",
     "./src/category/application": "./dist/category/application/index.js",
     "./src/category/domain": "./dist/category/domain/index.js",
-    "./src/category/infra": "./dist/category/infra/index.js"
+    "./src/category/infra": "./dist/category/infra/index.js",
+    "./src/cast-member/application": "./dist/cast-member/application/index.js",
+    "./src/cast-member/domain": "./dist/cast-member/domain/index.js",
+    "./src/cast-member/infra": "./dist/cast-member/infra/index.js"
   },
   "scripts": {
     "tsc": "tsc",
